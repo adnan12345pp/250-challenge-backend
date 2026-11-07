@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { connectDB } from "../../../../lib/db.js";
 import { getAuthenticatedUser } from "../../../../lib/auth.js";
 import PaymentClaim from "../../../../models/PaymentClaim.js";
+import DonorProfile from "../../../../models/DonorProfile.js";
 import { UserRole } from "../../../../lib/constants.js";
 
 export async function GET(req) {
@@ -22,7 +23,7 @@ export async function GET(req) {
     if (cycle) query.cycle = cycle;
     if (status) query.status = status;
 
-    const [claims, total] = await Promise.all([
+    const [claims, total, profiles] = await Promise.all([
       PaymentClaim.find(query)
         .populate("donorProfileId", "fullName careOf shares")
         .populate("userId", "phoneNumber")
@@ -30,10 +31,14 @@ export async function GET(req) {
         .skip((page - 1) * limit)
         .limit(limit),
       PaymentClaim.countDocuments(query),
+      DonorProfile.find({})
+        .populate("userId", "phoneNumber")
+        .sort({ createdAt: -1 }),
     ]);
 
     return NextResponse.json({
       claims,
+      profiles,
       pagination: {
         total,
         page,

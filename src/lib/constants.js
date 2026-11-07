@@ -1,0 +1,25 @@
+export const CAMPAIGN_CONFIG = {
+  TOTAL_SHARES: 4000,
+  SHARE_PRICE: 250, // ₹250
+  MONTHLY_TARGET: 1000000, // ₹10,00,000
+  DUE_DAY_OF_MONTH: 10,
+  REMINDER_DAY_OF_MONTH: 15,
+};
+
+export const ProfileStatus = {
+  ACTIVE: "ACTIVE",
+  DEACTIVATED: "DEACTIVATED",
+  PENDING_DEACTIVATION: "PENDING_DEACTIVATION",
+};
+
+export const PaymentStatus = {
+  NOT_PAID: "NOT_PAID",
+  PENDING: "PENDING",
+  PAID: "PAID",
+  REJECTED: "REJECTED",
+};
+
+export const UserRole = {
+  DONOR: "DONOR",
+  ADMIN: "ADMIN",
+};

@@ -3,6 +3,7 @@ import { connectDB } from "../../../../lib/db.js";
 import { getAuthenticatedUser } from "../../../../lib/auth.js";
 import PaymentClaim from "../../../../models/PaymentClaim.js";
 import DonorProfile from "../../../../models/DonorProfile.js";
+import "../../../../models/User.js";
 import { UserRole } from "../../../../lib/constants.js";
 
 export async function GET(req) {
